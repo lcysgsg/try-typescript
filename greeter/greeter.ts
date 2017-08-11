@@ -87,3 +87,120 @@ something1 = 7;
 let something2: any;
 something2 = 'seven';
 something2 = 7;
+
+// 联合类型（Union Types）表示取值可以为多种类型中的一种。
+let otherFavorite: string | number;
+otherFavorite = 'seven';
+otherFavorite = 7;
+
+// 当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法
+function getLength(something: string | number): string {
+  return something.toString();
+}
+
+// 赋值的时候，变量的形状必须和接口的形状保持一致
+interface Person1 {
+  name: string,
+  age: number
+}
+
+let lcy1: Person1 = {
+  name: 'cyyy',
+  age: 123
+}
+
+// 可选属性的含义是该属性可以不存在
+interface optionsType {
+  name: string,
+  age?: number
+}
+let lcy2: optionsType = {
+  name: 'cyyyy'
+}
+
+// 一旦定义了任意属性名，那么确定属性和可选属性都必须是它的子属性
+// 可选属性也必须迁就任意属性名的属性
+interface customerType {
+  name: string,
+  age?: number,
+  [propName: string]: string
+}
+let lcy3: customerType = {
+  name: 'cyyyyy',
+  age: 123,
+  petName: 'cy'
+}
+
+// 希望对象中的一些字段只能在创建的时候被赋值，那么可以用 readonly 定义只读属性
+interface readonlyType {
+  readonly id: number;
+  name: string;
+  age?: number;
+  [propName: string]: any;
+}
+
+let lcy4: readonlyType = {
+  id: 12345,
+  name: 'cyyyyyy',
+  petName: 'cy'
+};
+
+lcy4.id = 9527;
+
+/**
+ * 数组类型有多种定义的方式
+ */
+
+// 「类型 + 方括号」表示法
+// 不允许出现其他的类型
+let fibonacci: number[] = [1, '1', 2, 3, 5];
+ 
+fibonacci.push('8')
+
+// 数组泛型（Generic） Array<elemType>
+let genericNumber: Array<number> = [1,2,3,4,5,6]
+
+// 接口也可以用来描述数组
+interface NumberArray {
+  [index: number]: string;
+}
+let nonc: NumberArray = [1]
+
+// 泛型约束
+// 函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法
+interface Lengthwise {
+  length: number
+}
+function loggingIdentity<T extends Lengthwise>(arg: T) {
+  console.log(arg)
+  return arg
+}
+loggingIdentity<string>('1234321')
+
+
+
+// 类数组（Array-like Object）不是数组类型
+
+
+
+
+
+
+
+
+function sum(x: number, y: number): string{
+  console.log(`${x} + ${y}`)
+  console.log(x + y)
+  console.log(`${x + y}`)
+  return `${x + y}`
+}
+sum(1,5)
+
+let mySum: (x: number, y: number) => string = function (x: number, y: number): number {
+  var q = '' + x + y
+  return q
+}
+
+export {
+  
+}

@@ -1,3 +1,4 @@
+"use strict";
 var Student = (function () {
     function Student(firstName, middleInitial, lastName) {
         this.firstName = firstName;
@@ -74,3 +75,54 @@ something1 = 7;
 var something2;
 something2 = 'seven';
 something2 = 7;
+// 联合类型（Union Types）表示取值可以为多种类型中的一种。
+var otherFavorite;
+otherFavorite = 'seven';
+otherFavorite = 7;
+// 当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法
+function getLength(something) {
+    return something.toString();
+}
+var lcy1 = {
+    name: 'cyyy',
+    age: 123
+};
+var lcy2 = {
+    name: 'cyyyy'
+};
+var lcy3 = {
+    name: 'cyyyyy',
+    age: 123,
+    petName: 'cy'
+};
+var lcy4 = {
+    id: 12345,
+    name: 'cyyyyyy',
+    petName: 'cy'
+};
+lcy4.id = 9527;
+/**
+ * 数组类型有多种定义的方式
+ */
+// 「类型 + 方括号」表示法
+// 不允许出现其他的类型
+var fibonacci = [1, '1', 2, 3, 5];
+fibonacci.push('8');
+// 数组泛型（Generic） Array<elemType>
+var genericNumber = [1, 2, 3, 4, 5, 6];
+var nonc = [1];
+function loggingIdentity(arg) {
+    console.log(arg);
+    return arg;
+}
+loggingIdentity('1234321');
+// 类数组（Array-like Object）不是数组类型
+function sum(x, y) {
+    console.log(x + " + " + y);
+    console.log(x + y);
+    var a = '' + (x + y)
+    console.log(a);
+    console.log(typeof a);
+    return "" + (x + y);
+}
+sum(1, 5);

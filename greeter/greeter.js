@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var Student = (function () {
     function Student(firstName, middleInitial, lastName) {
         this.firstName = firstName;
@@ -120,9 +121,11 @@ loggingIdentity('1234321');
 function sum(x, y) {
     console.log(x + " + " + y);
     console.log(x + y);
-    var a = '' + (x + y)
-    console.log(a);
-    console.log(typeof a);
+    console.log("" + (x + y));
     return "" + (x + y);
 }
 sum(1, 5);
+var mySum = function (x, y) {
+    var q = '' + x + y;
+    return q;
+};

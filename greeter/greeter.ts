@@ -177,16 +177,7 @@ function loggingIdentity<T extends Lengthwise>(arg: T) {
 }
 loggingIdentity<string>('1234321')
 
-
-
 // 类数组（Array-like Object）不是数组类型
-
-
-
-
-
-
-
 
 function sum(x: number, y: number): string{
   console.log(`${x} + ${y}`)
@@ -200,6 +191,74 @@ let mySum: (x: number, y: number) => string = function (x: number, y: number): n
   var q = '' + x + y
   return q
 }
+
+// 接口中函数的定义
+interface SearchFunc{
+  (source: string, subString: string): boolean
+}
+let mySearch: SearchFunc
+mySearch = function (source: string, subString: string){
+  return source.search(subString) !== -1
+}
+
+// ES6 中，可以使用 ...rest 的方式获取函数中的剩余参数（rest 参数）
+function push(array: any[], ...items: any[]) {
+  items.forEach(function(item) {
+    array.push(item);
+  });
+}
+
+let a = [];
+push(a, 1, 2, 3);
+
+// 重载允许一个函数接受不同数量或类型的参数时，作出不同的处理
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string {
+  if (typeof x === 'number') {
+    return Number(x.toString().split('').reverse().join(''));
+  } else if (typeof x === 'string') {
+    return x.split('').reverse().join('');
+  }
+}
+
+// 类型断言（Type Assertion）可以用来绕过编译器的类型推断，手动指定一个值的类型（即程序员对编译器断言）
+/**
+ *  <类型>值
+
+    // 或
+
+    值 as 类型
+
+    // 在TSX语法 (React的JSX语法的TS版）中必须用后一种
+ */
+function getLength2(something: string | number): number {
+  if ((<string>something).length) {
+    return (<string>something).length;
+  } else {
+    return something.toString().length;
+  }
+}
+
+
+// 声明语句
+declare var jQuery: (string) => any;
+
+jQuery('#foo');
+// 通常我们会把类型声明放到一个单独的文件中，这就是声明文件：
+// jQuery.d.ts
+
+declare var jQuery: (string) => any;
+// 然后在使用到的文件的开头，用「三斜线指令」表示引用了声明文件：
+/// <reference path="./jQuery.d.ts" />
+
+jQuery('#foo');
+
+// 社区已经有多种方式引入声明文件，不过 TypeScript 2.0 推荐使用 @types 来管理。
+
+// @types 的使用方式很简单，直接用 npm 安装对应的声明模块即可，以 jQuery 举例：
+// npm install @types/jquery --save-dev
+// http://microsoft.github.io/TypeSearch/
 
 export {
   
